@@ -3,7 +3,7 @@ require('dotenv').config()
 import express from 'express'
 import compression from 'compression'
 import cors from 'cors'
-import {getNumberInfo} from './Services/Numbers';
+import { getNumberInfo } from './Services/Numbers';
 
 const app = express()
 
@@ -15,8 +15,12 @@ app.get('/', function (req, res) {
 })
 
 app.get('/number', async function (req, res) {
-	const response = await getNumberInfo(req.query.number.toString())
-	res.json(response);
+	try {
+		const response = await getNumberInfo(req.query.number.toString())
+		res.json(response);
+	} catch (error) {
+		res.json({})
+	}
 })
 
 app.listen(4000, () => console.log('App listening on port 4000!'))
