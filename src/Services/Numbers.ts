@@ -10,7 +10,7 @@ export const getNumberInfo = async (number: string) => {
 	} catch (error: AxiosError | any) {
 		return {
 			code: error.response.status,
-			data: error.response.data.description
+			data: { errorMessage: error.response.data.description }
 		}
 	}
 }
