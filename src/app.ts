@@ -17,8 +17,12 @@ app.get('/', function (req, res) {
 app.get('/number', async function (req, res) {
 	try {
 		const response = await getNumberInfo(req.query.number.toString())
-		res.json(response);
+		if (response.code !== 200) {
+			res.status(404);
+		}
+		res.json(response.data);
 	} catch (error) {
+		res.status(404);
 		res.json({})
 	}
 })
